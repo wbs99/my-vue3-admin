@@ -2,7 +2,14 @@ import { AppStore } from './../store/AppStore';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", redirect: "/login" },
+  {
+    path: "/", redirect: "/dashboard", component: () => import("../components/Layout.vue"),
+    children: [
+      {
+        path: '/dashboard', component: () => import("../views/dashboard.vue"),
+      },
+    ]
+  },
   {
     path: '/login', component: () => import("../views/Login.vue"),
   },
