@@ -3,7 +3,8 @@
     <div class="content">
       <t-card>
         <h1> mango admin</h1>
-        <t-form :data="loginForm" :rules="rules" ref="form" :colon="true" :label-width="0" class="login-form">
+        <t-form :data="loginForm" :rules="rules" ref="form" :colon="true" :label-width="0" class="login-form"
+          @submit="onLogin">
           <t-form-item name="username">
             <t-input v-model="loginForm.username" clearable placeholder="请输入用户名">
               <template #prefix-icon>
@@ -28,12 +29,17 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon } from 'tdesign-vue-next';
+import { Icon, SubmitContext } from 'tdesign-vue-next';
 import { reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { AppStore } from '../store/AppStore';
 
+const route = useRoute()
+const router = useRouter()
+const appStore = AppStore()
 const loginForm = reactive({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: 'admin123'
 })
 const rules = {
   username: [
@@ -42,6 +48,14 @@ const rules = {
   password: [
     { required: true, message: '请填写密码' }
   ],
+}
+
+const onLogin = async ({ validateResult }: SubmitContext) => {
+  if (validateResult === true) {
+    await appStore.login(loginForm)
+    const returnTo = route.query.return_to?.toString()
+    router.push(returnTo || '/dashboard')
+  }
 }
 </script>
 
