@@ -33,10 +33,12 @@ import { Icon, SubmitContext } from 'tdesign-vue-next';
 import { reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AppStore } from '../store/AppStore';
+import { UserStore } from '../store/UserStore';
 
 const route = useRoute()
 const router = useRouter()
 const appStore = AppStore()
+const userStore = UserStore()
 const loginForm = reactive({
   username: 'admin',
   password: 'admin123'
@@ -53,6 +55,7 @@ const rules = {
 const onLogin = async ({ validateResult }: SubmitContext) => {
   if (validateResult === true) {
     await appStore.login(loginForm)
+    await userStore.fetchCurrentUser()
     const returnTo = route.query.return_to?.toString()
     router.push(returnTo || '/dashboard')
   }

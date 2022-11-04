@@ -1,3 +1,4 @@
+import { AppStore } from '../store/AppStore';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { MessagePlugin } from "tdesign-vue-next";
 
@@ -53,15 +54,10 @@ const baseUrl: string = import.meta.env.VITE_API_BASE_URL
 export const http = new Http(baseUrl)
 
 http.instance.interceptors.request.use(config => {
-  const jwt = localStorage.getItem('jwt')
-  if (jwt) { config.headers!.Authorization = `Bearer ${jwt}` }
-  // if (config._autoLoading === true) {
-  //   Toast.loading({
-  //     message: '加载中...',
-  //     forbidClick: true,
-  //     duration: 0
-  //   });
-  // }
+  const appStore = AppStore()
+  const token = appStore.token
+  if (token) { config.headers!.Authorization = `Bearer ${token}` }
+
   return config
 })
 
@@ -73,22 +69,12 @@ http.instance.interceptors.request.use(config => {
 //   if (error.response.status >= 400) { throw error } else { return error.response }
 // })
 
-// http.instance.interceptors.response.use((response) => {
-//   if (response.config._autoLoading === true) {
-//     Toast.clear();
-//   }
-//   return response
-// }, (error: AxiosError) => {
-//   if (error.response?.config._autoLoading === true) {
-//     Toast.clear();
-//   }
-//   throw error
-// })
 http.instance.interceptors.response.use(
   response => response.data,
   (error: AxiosError<ErrorResponse>) => {
     const responseData: ErrorResponse | undefined = error.response?.data;
     responseData && (MessagePlugin.error(responseData.message));
+    if (error.response?.status === 429) { alert('请求太频繁') }
     throw error
   }
 )

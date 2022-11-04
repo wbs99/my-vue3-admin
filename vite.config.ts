@@ -5,5 +5,5 @@ import { svgstore } from './src/vite_plugins/svgstore';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), svgstore(),]
+  plugins: [vue(), svgstore()],
 })

@@ -3,7 +3,7 @@
     <t-layout class="main-layout">
       <t-aside>Aside</t-aside>
       <t-layout>
-        <t-header>Header</t-header>
+        <LayoutHeader />
         <t-content>
           <router-view></router-view>
         </t-content>
@@ -14,6 +14,8 @@
 </template>
 
 <script lang="ts" setup>
+import LayoutHeader from './LayoutHeader.vue';
+
 
 </script>
 

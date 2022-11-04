@@ -3,8 +3,11 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { createTokenApi } from "../apis/token";
 import { TokenRequest } from "../apis/types";
+import { UserStore } from './UserStore';
+
 
 export const AppStore = defineStore(
+
   "AppStore",
   () => {
     const token = ref('')
@@ -13,7 +16,11 @@ export const AppStore = defineStore(
       token.value = response
       MessagePlugin.success('登录成功')
     }
-    return { token, login };
+    const logout = () => {
+      token.value = ''
+      localStorage.removeItem('UserStore')
+    }
+    return { token, login, logout };
   },
   {
     persist: true,
