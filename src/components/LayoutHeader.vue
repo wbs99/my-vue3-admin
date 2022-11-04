@@ -1,7 +1,7 @@
 <template>
   <div>
     <t-header class="header">
-      <div class="collapse-button">aside button</div>
+      <MenuButton v-model:collapse="appStore.menuStatus" class="operation-area" />
       <div class="operation-area">
         <t-dropdown :options="options" @click="clickHandler">
           <t-button variant="text">
@@ -11,7 +11,6 @@
             {{ userStore.currentUser.nickname }}
           </t-button>
         </t-dropdown>
-
       </div>
     </t-header>
   </div>
@@ -22,6 +21,8 @@ import { Icon } from 'tdesign-vue-next';
 import { UserStore } from '../store/UserStore';
 import { AppStore } from '../store/AppStore';
 import { useRoute, useRouter } from 'vue-router';
+import MenuButton from './MenuButton.vue';
+import { ref } from 'vue';
 
 const userStore = UserStore()
 const appStore = AppStore()
