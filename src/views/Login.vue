@@ -32,13 +32,13 @@
 import { Icon, SubmitContext } from 'tdesign-vue-next';
 import { reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { AppStore } from '../store/useAppStore';
-import { UserStore } from '../store/useUserStore';
+import { useAppStore } from '../store/useAppStore';
+import { useUserStore } from '../store/useUserStore';
 
 const route = useRoute()
 const router = useRouter()
-const appStore = AppStore()
-const userStore = UserStore()
+const appStore = useAppStore()
+const userStore = useUserStore()
 const loginForm = reactive({
   username: 'admin',
   password: 'admin123'
