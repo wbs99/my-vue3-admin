@@ -5,9 +5,8 @@ import { createTokenApi } from "../apis/token";
 import { TokenRequest } from "../apis/types";
 
 
-export const AppStore = defineStore(
-
-  "AppStore",
+export const useAppStore = defineStore(
+  "appStore",
   () => {
     const token = ref('')
     const menuStatus = ref(true)
@@ -18,7 +17,7 @@ export const AppStore = defineStore(
     }
     const logout = () => {
       token.value = ''
-      localStorage.removeItem('UserStore')
+      localStorage.removeItem('userStore')
     }
     return { token, login, logout, menuStatus };
   },

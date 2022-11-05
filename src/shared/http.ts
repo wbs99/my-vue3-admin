@@ -1,4 +1,4 @@
-import { AppStore } from '../store/useAppStore';
+import { useAppStore } from '../store/useAppStore';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { MessagePlugin } from "tdesign-vue-next";
 
@@ -54,7 +54,7 @@ const baseUrl: string = import.meta.env.VITE_API_BASE_URL
 export const http = new Http(baseUrl)
 
 http.instance.interceptors.request.use(config => {
-  const appStore = AppStore()
+  const appStore = useAppStore()
   const token = appStore.token
   if (token) { config.headers!.Authorization = `Bearer ${token}` }
 

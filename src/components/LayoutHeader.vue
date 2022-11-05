@@ -18,13 +18,13 @@
 
 <script lang="ts" setup>
 import { Icon } from 'tdesign-vue-next';
-import { AppStore } from '../store/useAppStore';
+import { useAppStore } from '../store/useAppStore';
 import { useRoute, useRouter } from 'vue-router';
 import MenuButton from './MenuButton.vue';
-import { UserStore } from '../store/useUserStore';
+import { useUserStore } from '../store/useUserStore';
 
-const userStore = UserStore()
-const appStore = AppStore()
+const userStore = useUserStore()
+const appStore = useAppStore()
 const route = useRoute()
 const router = useRouter()
 const options = [

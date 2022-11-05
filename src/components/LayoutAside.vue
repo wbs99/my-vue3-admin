@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts" setup>
-import { AppStore } from '../store/useAppStore';
-import { PermissionStore } from '../store/usePermissionStore';
+import { useAppStore } from '../store/useAppStore';
+import { usePermissionStore } from '../store/usePermissionStore';
 import AsideMenu from './AsideMenu.vue';
-const appStore = AppStore()
-const permissionStore = PermissionStore()
+const appStore = useAppStore()
+const permissionStore = usePermissionStore()
 
 
 </script>

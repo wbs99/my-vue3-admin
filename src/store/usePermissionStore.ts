@@ -5,25 +5,22 @@ import { routes as AllRoutes } from "../router";
 
 
 
-export const PermissionStore = defineStore(
-  "PermissionStore",
+export const usePermissionStore = defineStore(
+  "permissionStore",
   () => {
     const count = ref(1)
     const doubleCount = computed(() => {
-      console.log('count')
+      console.log('computed count')
       return count.value * 2
     })
     const routes: RouteRecordRaw[] = reactive([])
+
     const menuRoutes = computed(() => {
-      if (routes !== undefined) {
-        console.log('menuRoutes')
-
-        return routes.find(route => route.name === 'menuRoot')?.children
-
-      }
+      console.log('computed menuRoutes')
+      return routes.find(route => route.name === 'menuRoot')?.children
     })
     const filterRoutes = (routes: RouteRecordRaw[], permissions: string[]) => {
-      return routes.filter((route: RouteRecordRaw) => {
+      return routes.filter(route => {
         if (route.children) { route.children = filterRoutes(route.children, permissions); }
         // 1. 没有定义meta的路由 ： !route.meta
         // 2. 没有定义meta里面permission !route.meta.permission

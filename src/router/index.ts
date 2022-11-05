@@ -1,4 +1,4 @@
-import { AppStore } from '../store/useAppStore';
+import { useAppStore } from '../store/useAppStore';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { PermissionEnum } from '../config/permission.config';
 
@@ -77,7 +77,7 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
 }
 
 router.beforeEach((to, from) => {
-  const appStore = AppStore()
+  const appStore = useAppStore()
   for (const key in whiteList) {
     const value = whiteList[key]
     if (value === 'exact' && to.path === key) {
