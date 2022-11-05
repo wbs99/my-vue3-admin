@@ -1,7 +1,7 @@
 <template>
   <div>
     <t-layout class="main-layout">
-      <t-aside>Aside</t-aside>
+      <LayoutAside />
       <t-layout>
         <LayoutHeader />
         <t-content>
@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts" setup>
+import LayoutAside from './LayoutAside.vue';
 import LayoutHeader from './LayoutHeader.vue';
 
 

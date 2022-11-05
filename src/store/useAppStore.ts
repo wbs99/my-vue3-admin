@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { createTokenApi } from "../apis/token";
 import { TokenRequest } from "../apis/types";
-import { UserStore } from './UserStore';
 
 
 export const AppStore = defineStore(

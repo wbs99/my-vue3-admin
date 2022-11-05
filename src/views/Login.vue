@@ -32,8 +32,8 @@
 import { Icon, SubmitContext } from 'tdesign-vue-next';
 import { reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { AppStore } from '../store/AppStore';
-import { UserStore } from '../store/UserStore';
+import { AppStore } from '../store/useAppStore';
+import { UserStore } from '../store/useUserStore';
 
 const route = useRoute()
 const router = useRouter()

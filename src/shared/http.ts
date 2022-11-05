@@ -1,4 +1,4 @@
-import { AppStore } from '../store/AppStore';
+import { AppStore } from '../store/useAppStore';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { MessagePlugin } from "tdesign-vue-next";
 
