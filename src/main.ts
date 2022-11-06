@@ -7,6 +7,7 @@ import Icon from "./components/Icon.vue";
 import '@svgstore';
 import TDesign from 'tdesign-vue-next';
 import 'tdesign-vue-next/es/style/index.css';
+import { permissionDirective } from './directives/permission';
 
 
 const pinia = createPinia()
@@ -16,4 +17,5 @@ app.component("Icon", Icon);
 app.use(TDesign);
 app.use(router)
 app.use(pinia)
+app.directive("permission", permissionDirective);
 app.mount('#app')
