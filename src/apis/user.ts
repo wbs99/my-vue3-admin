@@ -1,6 +1,8 @@
+import { AxiosResponse } from "axios";
 import { GetConfig, http } from "../shared/http"
 
 export type UserType = {
+  id: string;
   username: string
   nickname: string
   roles: string[]

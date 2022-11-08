@@ -19,11 +19,10 @@
 <script lang="ts" setup>
 import { Icon } from "tdesign-vue-next";
 import { PermissionEnum } from "../../config/permission.config";
-import { UserType } from "../../apis/user";
-import { userListApi } from "../../apis/user";
-import type { PaginationProps, PageInfo } from "tdesign-vue-next";
-import { onMounted, reactive } from "vue";
 import { useAppStore } from "../../store/useAppStore";
+import { useSearch } from "../../hooks/useSearch";
+import { userListApi, UserType } from "../../apis/user";
+import { reactive } from "vue";
 const appStore = useAppStore()
 const columns = [
   { colKey: "id", title: "ID" },
@@ -32,38 +31,10 @@ const columns = [
   { colKey: "roles", title: "角色" },
   { colKey: "operation", title: "操作" },
 ];
-const data = reactive<UserType[]>([]);
-const pagination = reactive<PaginationProps>({
-  current: 1,
-  total: 0,
-  pageSize: 10,
-});
 const searchKey = reactive({
   name: "",
 });
-const fetchData = async () => {
-  const response = await userListApi(
-    {
-      name: searchKey.name,
-      page: pagination.current,
-      size: pagination.pageSize,
-      total: pagination.total,
-    },
-    {
-      _autoLoading: true
-    }
-  );
-  Object.assign(data, response.data.data);
-  Object.assign(pagination, response.data.paging);
-};
-const onPageChange = (pageInfo: PageInfo) => {
-  pagination.current = pageInfo.current;
-  pagination.pageSize = pageInfo.pageSize;
-  fetchData();
-};
-onMounted(() => {
-  fetchData();
-});
+const { data, pagination, fetchData, onPageChange } = useSearch<UserType, typeof searchKey>(userListApi, searchKey)
 </script>
 
 <style lang="scss" scoped>
