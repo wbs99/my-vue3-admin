@@ -1,6 +1,6 @@
 import { meApi } from '../apis/user';
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { UserType } from "../apis/user";
 import { usePermissionStore } from './usePermissionStore';
 
@@ -16,7 +16,7 @@ export const useUserStore = defineStore(
     })
     const fetchCurrentUser = async () => {
       const response = await meApi()
-      Object.assign(currentUser, response)
+      Object.assign(currentUser, response.data)
       permissionStore.generateRoutes(currentUser.permissions)
     }
     return { currentUser, fetchCurrentUser }

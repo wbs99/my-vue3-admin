@@ -57,20 +57,12 @@ http.instance.interceptors.request.use(config => {
   const appStore = useAppStore()
   const token = appStore.token
   if (token) { config.headers!.Authorization = `Bearer ${token}` }
-
   return config
 })
 
-// http.instance.interceptors.response.use((response) => {
-//   mock(response)
-//   if (response.status >= 400) { throw { response } } else { return response }
-// }, (error) => {
-//   mock(error.response)
-//   if (error.response.status >= 400) { throw error } else { return error.response }
-// })
 
 http.instance.interceptors.response.use(
-  response => response.data,
+  response => response,
   (error: AxiosError<ErrorResponse>) => {
     const responseData: ErrorResponse | undefined = error.response?.data;
     responseData && (MessagePlugin.error(responseData.message));
@@ -78,4 +70,3 @@ http.instance.interceptors.response.use(
     throw error
   }
 )
-
