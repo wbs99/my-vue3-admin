@@ -37,7 +37,6 @@ type OptionType = {
 
 const clickHandler = (data: OptionType) => {
   if (data.value === 'logout') {
-    console.log('logout')
     appStore.logout()
     router.push(`/login?return_to=${route.fullPath}`)
   }

@@ -4,7 +4,7 @@ import { MessagePlugin } from "tdesign-vue-next";
 
 // import { mockItemCreate, mockSession, mockTagIndex } from "../mock/mock";
 
-type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
+export type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
@@ -12,6 +12,7 @@ type ErrorResponse = {
   code: number
   message: string
 }
+
 
 
 export class Http {
@@ -53,11 +54,32 @@ export class Http {
 const baseUrl: string = import.meta.env.VITE_API_BASE_URL
 export const http = new Http(baseUrl)
 
+// set header
 http.instance.interceptors.request.use(config => {
   const appStore = useAppStore()
   const token = appStore.token
   if (token) { config.headers!.Authorization = `Bearer ${token}` }
+  if (config._autoLoading === true) {
+    appStore.openLoading()
+  }
   return config
+})
+
+// loading
+http.instance.interceptors.response.use((response) => {
+  const appStore = useAppStore()
+
+  if (response.config._autoLoading === true) {
+    appStore.closeLoading()
+  }
+  return response
+}, (error: AxiosError) => {
+  const appStore = useAppStore()
+
+  if (error.response?.config._autoLoading === true) {
+    appStore.closeLoading()
+  }
+  throw error
 })
 
 

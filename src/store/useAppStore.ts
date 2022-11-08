@@ -10,6 +10,7 @@ export const useAppStore = defineStore(
   () => {
     const token = ref('')
     const menuStatus = ref(true)
+    const loading = ref(false)
     const login = async (loginForm: TokenRequest) => {
       const response: any = await createTokenApi(loginForm)
       token.value = response.data
@@ -19,7 +20,9 @@ export const useAppStore = defineStore(
       token.value = ''
       localStorage.removeItem('userStore')
     }
-    return { token, login, logout, menuStatus };
+    const openLoading = () => loading.value = true
+    const closeLoading = () => loading.value = false
+    return { token, login, logout, menuStatus, openLoading, closeLoading, loading };
   },
   {
     persist: true,
