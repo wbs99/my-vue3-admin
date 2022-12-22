@@ -19,7 +19,8 @@
 
 <script lang="ts" setup>
 import { computed, reactive } from "vue";
-import { UserType } from "../apis/user";
+import { UserType } from "../apis/types";
+
 
 interface Props {
   dialogVisible: boolean;

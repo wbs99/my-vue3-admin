@@ -1,6 +1,7 @@
 import { useAppStore } from '../store/useAppStore';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { MessagePlugin } from "tdesign-vue-next";
+import { ErrorResponse } from '../apis/types';
 
 // import { mockItemCreate, mockSession, mockTagIndex } from "../mock/mock";
 
@@ -8,10 +9,6 @@ export type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
-type ErrorResponse = {
-  code: number
-  message: string
-}
 
 
 

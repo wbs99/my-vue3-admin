@@ -1,7 +1,7 @@
 import { meApi } from '../apis/user';
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
-import { UserType } from "../apis/user";
+import { UserType } from "../apis/types";
 import { usePermissionStore } from './usePermissionStore';
 
 export const useUserStore = defineStore(
