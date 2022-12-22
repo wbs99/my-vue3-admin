@@ -7,6 +7,7 @@ import Icon from "./components/Icon.vue";
 import '@svgstore';
 import TDesign from 'tdesign-vue-next';
 import 'tdesign-vue-next/es/style/index.css';
+import './assets/stylesheets/base.scss'
 import { permissionDirective } from './directives/permission';
 
 

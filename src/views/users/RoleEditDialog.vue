@@ -4,10 +4,14 @@
     @confirm="handleConfirm">
     <t-form ref="form" :data="role" :rules="rules">
       <t-form-item label="角色名称" name="name">
-        <t-input placeholder="请输入角色名称" v-model="role.name" />
+        <t-input placeholder="请输入角色名称" v-model="role.name" disabled />
       </t-form-item>
-      <t-form-item label="用户标识" name="label">
-        <t-input placeholder="请输入用户标识" v-model="role.label" />
+      <t-form-item label="角色标识" name="label">
+        <t-input placeholder="角色标识" v-model="role.label" />
+      </t-form-item>
+      <t-form-item label="权限集" name="permissions">
+        <t-tree :data="permissionsTree" v-model="role.permissions" hover expand-all :checkable="true"
+          value-mode="all" />
       </t-form-item>
     </t-form>
   </t-dialog>
@@ -17,6 +21,7 @@
 <script lang="ts" setup>
 import { computed, reactive, watch } from "vue";
 import { RoleType } from "../../apis/types";
+import { permissionsTree } from '../../config/permission.config'
 
 interface Props {
   dialogVisible: boolean;

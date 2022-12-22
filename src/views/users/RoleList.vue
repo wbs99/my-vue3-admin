@@ -29,6 +29,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Icon } from "tdesign-vue-next";
 import { reactive } from 'vue';
 import { roleListApi } from '../../apis/roles';
 import { RoleType } from '../../apis/types';
@@ -67,12 +68,4 @@ const openEditDialog = (item: any) => {
 </script>
 
 <style lang="scss" scoped>
-.search-area {
-  margin-top: 20px;
-  display: flex;
-  .search-input {
-    width: 200px;
-    margin-right: 20px;
-  }
-}
 </style>

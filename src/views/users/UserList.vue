@@ -27,11 +27,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon, MessagePlugin } from "tdesign-vue-next";
+import { Icon } from "tdesign-vue-next";
 import { PermissionEnum } from "../../config/permission.config";
 import { useAppStore } from "../../store/useAppStore";
 import { useSearch } from "../../hooks/useSearch";
-import { createUserApi, editUserApi, userListApi } from "../../apis/user";
+import { userListApi } from "../../apis/user";
 import { UserType } from "../../apis/types";
 import { reactive } from "vue";
 import EditDialog from "../../components/EditDialog.vue";
@@ -64,12 +64,4 @@ const openEditDialog = (item: any) => {
 </script>
 
 <style lang="scss" scoped>
-.search-area {
-  margin-top: 20px;
-  display: flex;
-  .search-input {
-    width: 200px;
-    margin-right: 20px;
-  }
-}
 </style>
