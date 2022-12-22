@@ -17,13 +17,10 @@
 import LayoutAside from './LayoutAside.vue';
 import LayoutHeader from './LayoutHeader.vue';
 
-
 </script>
-
 
 <style lang="scss" scoped>
 .main-layout{
   height: 100vh;
 }
-
 </style>

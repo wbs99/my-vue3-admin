@@ -84,7 +84,11 @@ router.beforeEach((to, from) => {
       return true
     }
     if (value === 'startsWith' && to.path.startsWith(key)) {
-      return true
+      if (appStore.token && to.path === '/login') {
+        router.push('/dashboard')
+      } else {
+        return true
+      }
     }
   }
   return appStore.token ? true : `/login?return_to=${to.path}`

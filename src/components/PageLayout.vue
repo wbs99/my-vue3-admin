@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <router-view></router-view>
   </div>
 </template>
@@ -10,5 +10,7 @@
 
 
 <style lang="scss" scoped>
-
+.page{
+  padding: 24px;
+}
 </style>

@@ -12,7 +12,7 @@ export const useAppStore = defineStore(
     const menuStatus = ref(true)
     const loading = ref(false)
     const login = async (loginForm: TokenRequest) => {
-      const response: any = await createTokenApi(loginForm)
+      const response = await createTokenApi(loginForm)
       token.value = response.data
       MessagePlugin.success('登录成功')
     }

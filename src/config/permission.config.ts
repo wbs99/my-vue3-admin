@@ -12,10 +12,10 @@ export enum PermissionEnum {
 type PermissionsTree = {
   label: string;
   value: string;
-  children?: Array<PermissionsTree>;
+  children?: PermissionsTree[];
 };
 
-export const permissionsTree: Array<PermissionsTree> = [
+export const permissionsTree: PermissionsTree[] = [
   { label: "控制台", value: PermissionEnum.DASHBOARD },
   {
     label: "用户",

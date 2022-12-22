@@ -12,7 +12,8 @@ export const useUserStore = defineStore(
       username: '',
       nickname: '',
       roles: [],
-      permissions: []
+      permissions: [],
+      id: ''
     })
     const fetchCurrentUser = async () => {
       const response = await meApi()

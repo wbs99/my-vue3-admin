@@ -1,19 +1,15 @@
 <template>
-  <div>
-    <t-header class="header">
-      <MenuButton v-model:collapse="appStore.menuStatus" class="operation-area" />
-      <div class="operation-area">
-        <t-dropdown :options="options" @click="clickHandler">
-          <t-button variant="text">
-            <template #icon>
-              <icon name="user"></icon>
-            </template>
-            {{ userStore.currentUser.nickname }}
-          </t-button>
-        </t-dropdown>
-      </div>
-    </t-header>
-  </div>
+  <t-header class="header">
+    <MenuButton v-model:collapse="appStore.menuStatus" />
+    <t-dropdown :options="options" @click="clickHandler">
+      <t-button variant="text">
+        <template #icon>
+          <icon name="user"></icon>
+        </template>
+        {{ userStore.currentUser.nickname }}
+      </t-button>
+    </t-dropdown>
+  </t-header>
 </template>
 
 <script lang="ts" setup>
@@ -42,7 +38,6 @@ const clickHandler = (data: OptionType) => {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .header{

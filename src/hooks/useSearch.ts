@@ -1,9 +1,7 @@
 import { PageInfo, PaginationProps } from "tdesign-vue-next";
 import { onMounted, reactive } from "vue";
-import { userListApi, UserType } from "../apis/user";
 
 export const useSearch = <DataType, SearchKeyType>(api: any, searchKey: SearchKeyType) => {
-
   const data = reactive<DataType[]>([]);
   const pagination = reactive<PaginationProps>({
     current: 1,
@@ -31,6 +29,6 @@ export const useSearch = <DataType, SearchKeyType>(api: any, searchKey: SearchKe
     pagination.pageSize = pageInfo.pageSize;
     fetchData();
   };
-  onMounted(() => { fetchData() });
+  onMounted(fetchData);
   return { data, pagination, fetchData, onPageChange }
 }
