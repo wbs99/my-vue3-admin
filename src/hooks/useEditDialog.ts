@@ -1,10 +1,7 @@
 import { CellData, MessagePlugin } from "tdesign-vue-next";
-import { ref, reactive, Ref } from "vue";
+import { ref, reactive } from "vue";
 import { createUserApi, editUserApi } from "../apis/user";
 
-interface FData {
-  [k: string]: string | number | Array<any> | undefined | null | FData
-}
 export const useEditDialog = <T>(defaultData: T) => {
   const dialogVisible = ref(false)
   const editData = reactive<any>(defaultData);
