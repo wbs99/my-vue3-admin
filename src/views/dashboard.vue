@@ -24,7 +24,6 @@
 <script lang="ts" setup>
 import InfoCard from '../components/InfoCard.vue';
 
-
 const infoCards = [
   {
     icon: "user",
@@ -149,6 +148,6 @@ const options2 = {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

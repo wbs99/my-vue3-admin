@@ -4,10 +4,10 @@
       <LayoutAside />
       <t-layout>
         <LayoutHeader />
-        <t-content>
+        <t-content class="content-layout">
           <router-view></router-view>
         </t-content>
-        <t-footer>Footer</t-footer>
+        <t-footer class="footer">Copyright @ 2021-2022 PandaAdmin.</t-footer>
       </t-layout>
     </t-layout>
   </div>
@@ -22,5 +22,11 @@ import LayoutHeader from './LayoutHeader.vue';
 <style lang="scss" scoped>
 .main-layout{
   height: 100vh;
+}
+.content-layout {
+  padding: 24px;
+}
+.footer{
+  text-align: center;
 }
 </style>
