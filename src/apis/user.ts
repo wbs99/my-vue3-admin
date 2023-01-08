@@ -11,3 +11,5 @@ export const userListApi = (filterParams: UserFilter, loading: GetConfig) => htt
 export const createUserApi = (userCreateRequest: UserCreateRequest) => http.post<UserType>("/users", userCreateRequest)
 
 export const editUserApi = (id: string, userEditRequest: UserCreateRequest) => http.post<UserType>(`/user/${id}`, userEditRequest)
+
+export { UserType };

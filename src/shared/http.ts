@@ -53,7 +53,7 @@ export const http = new Http(baseUrl)
 
 // set header
 http.instance.interceptors.request.use(config => {
-  const appStore = useAppStore()
+  const appStore = appStore()
   const token = appStore.token
   if (token) { config.headers!.Authorization = `Bearer ${token}` }
   if (config._autoLoading === true) {
@@ -64,14 +64,14 @@ http.instance.interceptors.request.use(config => {
 
 // loading
 http.instance.interceptors.response.use((response) => {
-  const appStore = useAppStore()
+  const appStore = appStore()
 
   if (response.config._autoLoading === true) {
     appStore.closeLoading()
   }
   return response
 }, (error: AxiosError) => {
-  const appStore = useAppStore()
+  const appStore = appStore()
 
   if (error.response?.config._autoLoading === true) {
     appStore.closeLoading()
