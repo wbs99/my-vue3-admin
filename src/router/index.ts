@@ -77,7 +77,7 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
 }
 
 router.beforeEach((to, from) => {
-  const appStore = appStore()
+  const appStore = useAppStore()
   for (const key in whiteList) {
     const value = whiteList[key]
     if (value === 'exact' && to.path === key) {
