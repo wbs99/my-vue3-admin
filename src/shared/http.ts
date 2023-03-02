@@ -3,14 +3,10 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { MessagePlugin } from "tdesign-vue-next";
 import { ErrorResponse } from '../apis/types';
 
-// import { mockItemCreate, mockSession, mockTagIndex } from "../mock/mock";
-
 export type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
-
-
 
 export class Http {
   instance: AxiosInstance
@@ -31,22 +27,6 @@ export class Http {
   }
 }
 
-// const mock = (response: AxiosResponse) => {
-//   if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1' && location.hostname !== '192.168.3.57') { return false }
-//   switch (response.config?.params?._mock) {
-//     case 'tagIndex':
-//       [response.status, response.data] = mockTagIndex(response.config)
-//       return true
-//     case 'session':
-//       [response.status, response.data] = mockSession(response.config)
-//       return true
-//     case 'itemCreate':
-//       [response.status, response.data] = mockItemCreate(response.config)
-//       return true
-//   }
-//   return false
-// }
-
 
 const baseUrl: string = import.meta.env.VITE_API_BASE_URL
 export const http = new Http(baseUrl)
@@ -63,23 +43,24 @@ http.instance.interceptors.request.use(config => {
 })
 
 // loading
-http.instance.interceptors.response.use((response) => {
-  const appStore = useAppStore()
-
-  if (response.config._autoLoading === true) {
-    appStore.closeLoading()
+http.instance.interceptors.response.use(
+  response => {
+    const appStore = useAppStore()
+    if (response.config._autoLoading === true) {
+      appStore.closeLoading()
+    }
+    return response
+  },
+  (error: AxiosError) => {
+    const appStore = useAppStore()
+    if (error.response?.config._autoLoading === true) {
+      appStore.closeLoading()
+    }
+    throw error
   }
-  return response
-}, (error: AxiosError) => {
-  const appStore = useAppStore()
+)
 
-  if (error.response?.config._autoLoading === true) {
-    appStore.closeLoading()
-  }
-  throw error
-})
-
-
+// 统一错误处理
 http.instance.interceptors.response.use(
   response => response,
   (error: AxiosError<ErrorResponse>) => {
