@@ -1,61 +1,58 @@
-
 <template>
   <t-dialog width="900px" :header="user.id ? '编辑用户' : '创建用户'" :visible="dialogVisible" @close="onDialogClose"
     @confirm="handleConfirm">
-    <t-form ref="form" :data="user" :rules="rules">
+    <t-form :data="user" :rules="rules">
       <t-form-item label="用户名称" name="username">
-        <t-input placeholder="请输入用户名称" v-model="user.username" />
+        <t-input v-model="user.username" placeholder="请输入用户名称" />
       </t-form-item>
       <t-form-item label="用户昵称" name="nickname">
-        <t-input placeholder="请输入用户昵称" v-model="user.nickname" />
+        <t-input v-model="user.nickname" placeholder="请输入用户昵称" />
       </t-form-item>
       <t-form-item label="角色" name="roles">
-        <t-select v-model="user.roles" :options="options" clearable multiple> </t-select>
+        <t-select v-model="user.roles" :options="options" clearable multiple />
       </t-form-item>
     </t-form>
   </t-dialog>
 </template>
 
-
 <script lang="ts" setup>
-import { computed, reactive } from "vue";
-import { UserType } from "../apis/types";
-
+import { computed, reactive } from 'vue'
+import type { UserType } from '../apis/types'
 
 interface Props {
-  dialogVisible: boolean;
-  data: UserType | null;
+  dialogVisible: boolean
+  data: UserType | null
 }
 const props = withDefaults(defineProps<Props>(), {
   dialogVisible: false,
-});
-const emit = defineEmits(["update:dialogVisible", "confirm"]);
+})
+const emit = defineEmits(['update:dialogVisible', 'confirm'])
 
 const defaultData: UserType = {
-  id: "",
-  username: "",
-  nickname: "",
+  id: '',
+  username: '',
+  nickname: '',
   roles: [],
   permissions: [],
-};
-const dialogVisible = computed(() => props.dialogVisible);
-const onDialogClose = () => emit("update:dialogVisible", false);
+}
+const dialogVisible = computed(() => props.dialogVisible)
+const onDialogClose = () => emit('update:dialogVisible', false)
 
-const user = reactive(props.data || defaultData);
+const user = reactive(props.data || defaultData)
 const rules = {
-  username: [{ required: true, message: "用户名称不能为空", trigger: "blur" }],
-  nickname: [{ required: true, message: "用户昵称不能为空", trigger: "blur" }],
-};
+  username: [{ required: true, message: '用户名称不能为空', trigger: 'blur' }],
+  nickname: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
+}
 
 const options = computed(() => {
   return [
-    { label: "管理员", value: "ROLE_ADMIN" },
-    { label: "普通用户", value: "ROLE_USER" },
-  ];
-});
+    { label: '管理员', value: 'ROLE_ADMIN' },
+    { label: '普通用户', value: 'ROLE_USER' },
+  ]
+})
 const handleConfirm = () => {
-  emit("confirm", user);
-};
+  emit('confirm', user)
+}
 </script>
 
 <style lang="scss" scoped></style>

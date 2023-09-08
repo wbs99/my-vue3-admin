@@ -1,6 +1,5 @@
 <template>
-  <div class="collapse-button" :class="{ collapse: !collapse }" @click="$emit('update:collapse', !collapse)">
-  </div>
+  <div class="collapse-button" :class="{ collapse: !collapse }" @click="$emit('update:collapse', !collapse)" />
 </template>
 
 <script lang="ts" setup>
@@ -10,13 +9,14 @@ defineProps({
     required: true,
     default: true
   },
-});
+})
 
-defineEmits(["update:collapse"]);
+defineEmits(['update:collapse'])
 </script>
 
 <style lang="scss" scoped>
 $collapse-button-color: #686870;
+
 .collapse-button {
   width: 30px;
   height: 30px;
@@ -26,6 +26,7 @@ $collapse-button-color: #686870;
   cursor: pointer;
   transition: 0.5s;
   position: relative;
+
   &:before {
     position: absolute;
     width: 70%;
@@ -35,6 +36,7 @@ $collapse-button-color: #686870;
     transform: translateY(-7px);
     transition: 0.5s;
   }
+
   &:after {
     position: absolute;
     width: 70%;
@@ -45,14 +47,15 @@ $collapse-button-color: #686870;
     transform: translateY(7px);
     transition: 0.5s;
   }
+
   &.collapse {
     &:before {
       transform: translateY(0px) rotate(45deg);
     }
+
     &:after {
       transform: translateY(0px) rotate(-45deg);
       box-shadow: 0 0 0 $collapse-button-color;
     }
   }
-}
-</style>
+}</style>

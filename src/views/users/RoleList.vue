@@ -1,15 +1,16 @@
 <template>
   <t-card>
     <div class="action-area">
-      <t-button v-permission="PermissionEnum.USER_ROLES_CREATE" @click="openCreateUserDialog">创建角色
+      <t-button v-permission="PermissionEnum.USER_ROLES_CREATE" @click="openCreateUserDialog">
+        创建角色
       </t-button>
     </div>
     <div class="search-area">
-      <t-input class="search-input" v-model="searchKey.name" placeholder="请输入角色名称"></t-input>
-      <t-input class="search-input" v-model="searchKey.label" placeholder="请输入角色标识"></t-input>
+      <t-input v-model="searchKey.name" class="search-input" placeholder="请输入角色名称" />
+      <t-input v-model="searchKey.label" class="search-input" placeholder="请输入角色标识" />
       <t-button @click="fetchData">
         <template #icon>
-          <icon name="search"></icon>
+          <Icon name="search" />
         </template>
       </t-button>
     </div>
@@ -18,39 +19,39 @@
       <template #operation="slotProps">
         <t-button v-permission="PermissionEnum.USER_LIST_EDIT" variant="text" theme="primary"
           @click="openEditDialog(slotProps)">
-          <icon name="edit"></icon>
+          <Icon name="edit" />
           编辑
         </t-button>
       </template>
     </t-table>
-    <RoleEditDialog :dialogVisible='dialogVisible' @update:dialog-visible="onDialogClose" :data='editData'
-      @confirm='onConfirm' />
+    <RoleEditDialog :dialog-visible="dialogVisible" :data="editData" @update:dialog-visible="onDialogClose"
+      @confirm="onConfirm" />
   </t-card>
 </template>
 
 <script lang="ts" setup>
-import { Icon } from "tdesign-vue-next";
-import { reactive } from 'vue';
-import { roleListApi } from '../../apis/roles';
-import { RoleType } from '../../apis/types';
-import { useEditDialog } from '../../hooks/useEditDialog';
-import { useSearch } from '../../hooks/useSearch';
-import { PermissionEnum } from "../../config/permission.config";
-import { useAppStore } from '../../store/useAppStore';
+import { Icon } from 'tdesign-vue-next'
+import { reactive } from 'vue'
+import { roleListApi } from '../../apis/roles'
+import type { RoleType } from '../../apis/types'
+import { useEditDialog } from '../../hooks/useEditDialog'
+import { useSearch } from '../../hooks/useSearch'
+import { PermissionEnum } from '../../config/permission.config'
+import { useAppStore } from '../../store/useAppStore'
 import RoleEditDialog from './RoleEditDialog.vue'
+
 const appStore = useAppStore()
 
-
 const columns = [
-  { colKey: "id", title: "ID" },
-  { colKey: "username", title: "角色名" },
-  { colKey: "nickname", title: "昵称" },
-  { colKey: "roles", title: "角色" },
-  { colKey: "operation", title: "操作" }
+  { colKey: 'id', title: 'ID' },
+  { colKey: 'username', title: '角色名' },
+  { colKey: 'nickname', title: '昵称' },
+  { colKey: 'roles', title: '角色' },
+  { colKey: 'operation', title: '操作' }
 ]
 const searchKey = reactive({
-  name: "",
-  label: "",
+  name: '',
+  label: '',
 })
 const defaultData: RoleType = {
   id: '',
@@ -63,9 +64,8 @@ const { dialogVisible, editData, openCreateUserDialog, onDialogClose, onConfirm 
 
 const openEditDialog = (item: any) => {
   Object.assign(editData, item.row)
-  dialogVisible.value = true;
-};
+  dialogVisible.value = true
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

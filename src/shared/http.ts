@@ -1,7 +1,8 @@
-import { useAppStore } from '../store/useAppStore';
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
-import { MessagePlugin } from "tdesign-vue-next";
-import { ErrorResponse } from '../apis/types';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios from 'axios'
+import { MessagePlugin } from 'tdesign-vue-next'
+import { useAppStore } from '../store/useAppStore'
+import type { ErrorResponse } from '../apis/types'
 
 export type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
@@ -14,7 +15,7 @@ export class Http {
     this.instance = axios.create({ baseURL })
   }
   get<R = unknown>(url: string, query?: Record<string, JSONValue>, config?: GetConfig) {
-    return this.instance.request<R>({ ...config, url: url, params: query, method: 'get' })
+    return this.instance.request<R>({ ...config, url, params: query, method: 'get' })
   }
   post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
     return this.instance.request<R>({ ...config, url, data, method: 'post' })
@@ -23,10 +24,9 @@ export class Http {
     return this.instance.request<R>({ ...config, url, data, method: 'patch' })
   }
   delete<R = unknown>(url: string, query?: Record<string, string>, config?: DeleteConfig) {
-    return this.instance.request<R>({ ...config, url: url, params: query, method: 'delete' })
+    return this.instance.request<R>({ ...config, url, params: query, method: 'delete' })
   }
 }
-
 
 const baseUrl: string = import.meta.env.VITE_API_BASE_URL
 export const http = new Http(baseUrl)
@@ -64,8 +64,8 @@ http.instance.interceptors.response.use(
 http.instance.interceptors.response.use(
   response => response,
   (error: AxiosError<ErrorResponse>) => {
-    const responseData: ErrorResponse | undefined = error.response?.data;
-    responseData && (MessagePlugin.error(responseData.message));
+    const responseData: ErrorResponse | undefined = error.response?.data
+    responseData && (MessagePlugin.error(responseData.message))
     if (error.response?.status === 429) { alert('请求太频繁') }
     throw error
   }

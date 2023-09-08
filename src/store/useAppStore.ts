@@ -1,12 +1,11 @@
-import { MessagePlugin } from 'tdesign-vue-next';
-import { defineStore } from "pinia";
-import { ref } from "vue";
-import { createTokenApi } from "../apis/token";
-import { TokenRequest } from "../apis/types";
-
+import { MessagePlugin } from 'tdesign-vue-next'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { createTokenApi } from '../apis/token'
+import type { TokenRequest } from '../apis/types'
 
 export const useAppStore = defineStore(
-  "appStore",
+  'appStore',
   () => {
     const token = ref('')
     const menuStatus = ref(true)
@@ -22,9 +21,9 @@ export const useAppStore = defineStore(
     }
     const openLoading = () => loading.value = true
     const closeLoading = () => loading.value = false
-    return { token, login, logout, menuStatus, openLoading, closeLoading, loading };
+    return { token, login, logout, menuStatus, openLoading, closeLoading, loading }
   },
   {
     persist: true,
   }
-);
+)

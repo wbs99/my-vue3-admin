@@ -1,58 +1,59 @@
-import { useAppStore } from '../store/useAppStore';
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import { PermissionEnum } from '../config/permission.config';
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { useAppStore } from '../store/useAppStore'
+import { PermissionEnum } from '../config/permission.config'
 
-declare module "vue-router" {
+declare module 'vue-router' {
   interface RouteMeta {
-    permission?: string;
-    icon?: string;
-    title?: string;
+    permission?: string
+    icon?: string
+    title?: string
   }
 }
 
 export const routes: RouteRecordRaw[] = [
   {
-    path: "/", name: 'menuRoot', redirect: "/dashboard", component: () => import("../components/Layout.vue"),
+    path: '/', name: 'menuRoot', redirect: '/dashboard', component: () => import('../components/Layout.vue'),
     children: [
       {
         path: '/dashboard',
-        name: "dashboard",
-        component: () => import("../views/dashboard.vue"),
+        name: 'dashboard',
+        component: () => import('../views/dashboard.vue'),
         meta: {
           permission: PermissionEnum.DASHBOARD,
-          title: "控制台",
-          icon: "dashboard",
+          title: '控制台',
+          icon: 'dashboard',
         },
       },
       {
-        name: "user",
-        path: "user",
+        name: 'user',
+        path: 'user',
         component: () => import('../components/PageLayout.vue'),
         meta: {
-          title: "用户",
-          icon: "usergroup",
+          title: '用户',
+          icon: 'usergroup',
           permission: PermissionEnum.USER,
         },
-        redirect: { name: "user-list" },
+        redirect: { name: 'user-list' },
         children: [
           {
-            name: "user-list",
-            path: "list",
-            component: () => import("../views/users/UserList.vue"),
+            name: 'user-list',
+            path: 'list',
+            component: () => import('../views/users/UserList.vue'),
             meta: {
-              title: "用户管理",
-              icon: "user",
+              title: '用户管理',
+              icon: 'user',
               permission: PermissionEnum.USER_LIST,
             },
           },
           {
-            name: "role-list",
-            path: "roles",
-            component: () => import("../views/users/RoleList.vue"),
+            name: 'role-list',
+            path: 'roles',
+            component: () => import('../views/users/RoleList.vue'),
             meta: {
-              title: "角色管理",
+              title: '角色管理',
               permission: PermissionEnum.USER_ROLES,
-              icon: "secured",
+              icon: 'secured',
             },
           },
         ],
@@ -60,12 +61,12 @@ export const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/login', component: () => import("../views/Login.vue"),
+    path: '/login', component: () => import('../views/Login.vue'),
   },
   {
     path: '/403', component: () => import('../views/NotAllowed.vue'),
   },
-  { path: "/:pathMatch(.*)", component: () => import("../views/NotFound.vue") },
+  { path: '/:pathMatch(.*)', component: () => import('../views/NotFound.vue') },
 ]
 const history = createWebHashHistory()
 

@@ -1,10 +1,10 @@
 <template>
-  <t-header class="header">
+  <t-header class="flex justify-between items-center px-16px">
     <MenuButton v-model:collapse="appStore.menuStatus" />
     <t-dropdown :options="options" @click="clickHandler">
       <t-button variant="text">
         <template #icon>
-          <icon name="user"></icon>
+          <Icon name="user" />
         </template>
         {{ userStore.currentUser.nickname }}
       </t-button>
@@ -13,11 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon } from 'tdesign-vue-next';
-import { useAppStore } from '../store/useAppStore';
-import { useRoute, useRouter } from 'vue-router';
-import MenuButton from './MenuButton.vue';
-import { useUserStore } from '../store/useUserStore';
+import { Icon } from 'tdesign-vue-next'
+import { useRoute, useRouter } from 'vue-router'
+import { useAppStore } from '../store/useAppStore'
+import { useUserStore } from '../store/useUserStore'
+import MenuButton from './MenuButton.vue'
 
 const userStore = useUserStore()
 const appStore = useAppStore()
@@ -25,7 +25,7 @@ const route = useRoute()
 const router = useRouter()
 const options = [
   { content: '退出登录', value: 'logout' },
-];
+]
 type OptionType = {
   content: string
   value: string
@@ -36,14 +36,7 @@ const clickHandler = (data: OptionType) => {
     appStore.logout()
     router.push(`/login?return_to=${route.fullPath}`)
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
-.header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-}
-</style>
+<style lang="scss" scoped></style>

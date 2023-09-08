@@ -1,14 +1,15 @@
-import { CellData, MessagePlugin } from "tdesign-vue-next";
-import { ref, reactive } from "vue";
-import { createUserApi, editUserApi } from "../apis/user";
+import type { CellData } from 'tdesign-vue-next'
+import { MessagePlugin } from 'tdesign-vue-next'
+import { reactive, ref } from 'vue'
+import { createUserApi, editUserApi } from '../apis/user'
 
 export const useEditDialog = <T>(defaultData: T) => {
   const dialogVisible = ref(false)
-  const editData = reactive<any>(defaultData);
+  const editData = reactive<any>(defaultData)
   const openEditDialog = (item: CellData<T>) => {
     Object.assign(editData, item.row)
-    dialogVisible.value = true;
-  };
+    dialogVisible.value = true
+  }
   const openCreateUserDialog = () => dialogVisible.value = true
   const onDialogClose = () => {
     dialogVisible.value = false
@@ -16,13 +17,13 @@ export const useEditDialog = <T>(defaultData: T) => {
   }
   const onConfirm = async (user: any) => {
     if (editData.value && editData.value.id) {
-      await editUserApi(editData.value.id, user);
-      MessagePlugin.success(`编辑成功`);
+      await editUserApi(editData.value.id, user)
+      MessagePlugin.success('编辑成功')
     } else {
-      await createUserApi(user);
-      MessagePlugin.success(`创建成功`);
+      await createUserApi(user)
+      MessagePlugin.success('创建成功')
     }
-    onDialogClose();
-  };
+    onDialogClose()
+  }
   return { dialogVisible, editData, openEditDialog, openCreateUserDialog, onDialogClose, onConfirm }
 }
